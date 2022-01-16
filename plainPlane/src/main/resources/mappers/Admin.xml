@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.plainPlane.admin.AdminDAO">
+<!-- 모든 staff List -->
+	<select id="staffList" resultType="Gs">
+		SELECT * FROM GS
+	</select>
+
+<!-- 모든 flight List -->
+	<select id="flightList" resultType="Flt">
+		SELECT * FROM FLT
+	</select>
+
+</mapper>

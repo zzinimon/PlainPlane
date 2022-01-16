@@ -7,9 +7,10 @@
 <title>test main page</title>
 </head>
 <body>
+	<a href="http://localhost:8080/admin/staff">[Admin zone]staff list</a>
+	<a href="http://localhost:8080/admin/flight">[Admin zone]flight list</a>
 	<a href="http://localhost:8080/login">main(login)</a>
 	<a href="http://localhost:8080/main">common zone</a>
 	<a href="http://localhost:8080/flight">flight list</a>
-	<a href="http://localhost:8080/staff">staff list</a>
 </body>
 </html>

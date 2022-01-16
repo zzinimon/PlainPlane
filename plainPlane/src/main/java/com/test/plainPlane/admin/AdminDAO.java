@@ -5,10 +5,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.test.plainPlane.vo.Flt;
 import com.test.plainPlane.vo.Gs;
 
 @Repository
 @Mapper
 public interface AdminDAO {
-	public List<Gs> gsList();
+	public List<Gs> staffList();
+	public List<Flt> flightList();
 }
