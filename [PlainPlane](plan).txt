@@ -1,0 +1,83 @@
+(*DOM OR INT)
+*GO-SHOW
+*CHKIN(MEMO)
+*OFFLOAD(OL)
+*ON BOARD(OB)
+*BGG
+*B/I & B/O TIME
+*PSGR PPT
+*BP & BAG TAG
+* TIME :	CHKIN,
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		PAX
+*ADLT-INF-CHD
+*SSR(DEAF,BLND,WCH-RSC,PGNT,DEPU,DEPA)
+*SCL(TRANSFER)
+*STATUS
+
+-BGG ALOWANCE
+-RSV NO
+-BGG(NO, WEIGHT)
+-PPT NO
+-BT
+-MEMO
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		PLANE
+*INT/DOM
+*STATUS
+*STA & STD
+*ATA & ATD
+*FIGHT NO
+*AIRLINE
+*DEP,ARR
+*DATE
+->SUPER KEY:DATE+FLT NO
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+*ADMIN
+	-ASSIGN PLANES
+	-RM/ADD GS
+*GS
+	-ASSIGN PAX
+	-BGG CHKIN
+->ONLY THE ADMIN CAN ASSIGN PLANES
+->NO HAY 
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	BP INFO
+*PAX NAME
+*FLIGHT CODE+DATE+AIRPORT CODE(DEP-ARR)
+*DEP TIME
+*BOADING TIME
+*GATE NO
+*SEAT NO
+*RSV NO
++CLS (F,E)
+
+*PAX INFO(NAME)
+*DEP & ARR
+*FLIGHT NO
+*SEAT NO
+*RSV NO
++BT
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+AIRLINE 
+	-OZ,KE,7C,TW,
+	-BA,UA,
+	-JW,MM,NH,9W
+	-UO,HU
+	
+AIRPORT
+	-ICN,GMP,KIX,NRT,HND,KHH,KHG,
+	-LHR,FRA,BCN,MAD,SXF
+	-SFO,GUM,JFK,SYD
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+
+	***공부하고자 하는 것들***
+-DB를 효율적으로 설계한다.
+-SQL에서 TRIGGER를 생성하고 사용한다.
+	JOIN문을 사용한다.
+-외부 API를 받아와서 사용한다.(JSON) : 날씨, 지도, 세계시간 등
+-MVC 모델을 기능단위로 묶어서 관리한다.
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
