@@ -4,10 +4,14 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>test main page</title>
+<title>Admin page - GS List</title>
 <style>
 	body{
-		align-items: center;
+		margin:auto;
+		text-align: center;
+	}
+	table{
+		margin:auto;
 	}
 	th{
 		border:1px solid black; 
@@ -16,6 +20,10 @@
 </head>
 <body>
 	<div> 
+		<details>
+			<summary>auth</summary>
+			<p>OJT=0<br>GS=1<br>GC=2<br>DS=3<br>SV=4</p>
+		</details>
 		<table>
 			<caption>Employee List</caption>
 			<tr><th>Employee no</th><th>Authority</th><th>Air Line</th></tr>

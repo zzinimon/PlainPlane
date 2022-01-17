@@ -12,12 +12,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 	@Autowired
 	AdminService adminService;
-	
+//all about STAFF	
 	@GetMapping("/staff")
 	public String staffAll(Model model) {
 		model.addAttribute("gs", adminService.staffList());
 		return "admin/staff";
 	}
 	
+	
+	
+	
+//all about FLIGHT
+	@GetMapping("/flight")
+	public String flightAll(Model model) {
+		model.addAttribute("flt",adminService.flightList());
+		return "admin/flight";
+	}
 	
 }
