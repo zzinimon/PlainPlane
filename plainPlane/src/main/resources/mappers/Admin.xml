@@ -5,6 +5,15 @@
 	<select id="staffList" resultType="Gs">
 		SELECT * FROM GS
 	</select>
+	<!-- 	insert Gs VO -->
+	<insert id="addStaff" parameterType="Gs">
+		INSERT INTO GS(GS_ID, GS_PW, GS_AUTH,GS_AIRLINE)
+		VALUES(#{gs_id},#{gs_pw},#{gs_auth},#{gs_airline})
+	</insert>
+	
+
+
+
 
 <!-- 모든 flight List -->
 	<select id="flightList" resultType="Flt">

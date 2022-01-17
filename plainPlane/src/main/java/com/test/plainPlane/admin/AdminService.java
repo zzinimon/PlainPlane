@@ -17,6 +17,11 @@ public class AdminService {
 	public List<Gs> staffList(){
 		return adminDAO.staffList();
 	}
+	//add staff
+	public int addStaff(String[] att) {
+		Gs staff=new Gs(att[0],att[1],0,att[2]);
+		return adminDAO.addStaff(staff);
+	}
 
 	
 	

@@ -48,11 +48,17 @@
 	input.addEventListener("keyup",function(event){
 		if(event.keyCode===13){	//press Enter key
 			$.ajax({
-				type : "POST",
+				type : "post",
 				url : "/admin/staff/inputCmd",
 				data : {cmd:cmd.value},
 				dataType : "text",
-				success : function(){alert("test")}
+				success : function(){
+					location.href="/admin/staff"
+					//input.value="";
+				},
+				error : function(){
+					alert("CHK CMD");
+				}
 			});
 		}
 	});
