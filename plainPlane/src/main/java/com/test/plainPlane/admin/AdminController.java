@@ -1,8 +1,6 @@
 package com.test.plainPlane.admin;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletResponse;
+//import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,12 +17,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminController {
 	@Autowired
 	AdminService adminService;
+	ResponseEntity suc=new ResponseEntity(HttpStatus.OK);
+	ResponseEntity fail=new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+	
 //all about STAFF	
 	@GetMapping("/staff")
 	public String staffAll(Model model) {
 		model.addAttribute("gs", adminService.staffList());
 		return "admin/staff";
 	}
+	
+	/*
 	//execute command 
 	@PostMapping("/staff/inputCmd")
 	public void cmdSubmit(String cmd, HttpServletResponse res) throws Exception {
@@ -35,31 +38,43 @@ public class AdminController {
 			res.sendRedirect("http://localhost:8080/admin/staff/"+command+"?data="+data);
 		}
 	}
+	*/
+	
 	//command line test
-	@GetMapping("/staff/test")
+	@PostMapping("/staff/test")
 	public ResponseEntity test(@RequestParam String data) {
 		System.out.println("cmd:"+data);
 		if(data.equals("fail")) {
 			System.err.println("failed");
-			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+			return fail;
 		}
-		else{
-			return new ResponseEntity(HttpStatus.OK);}
+		else{return suc;}
 	}
 	
-	//add staff
-	@GetMapping("/staff/add")
+	//insert staff
+	@PostMapping("/staff/add")
 	public ResponseEntity addStaff(@RequestParam String data) {
 		System.out.println("staff info:"+data);
 		String[] attributes=data.split(" ");
 		if(attributes.length!=3) {
-			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+			return fail;
 		}
 		else{
 			adminService.addStaff(attributes);
-			return new ResponseEntity(HttpStatus.OK);
+			return suc;
 		}
 	}
+	//delete staff
+	@PostMapping("/staff/del")
+	public ResponseEntity deleteStaff(@RequestParam String data) {
+		if(data.equalsIgnoreCase("admin")) return fail;	//Cannot delete ADMIN
+		int rst=adminService.deleteStaff(data);	//rst=0 means couldn't find the staff
+		return (rst==1? suc: fail);
+	}
+	
+	
+	
+	
 	
 	
 	

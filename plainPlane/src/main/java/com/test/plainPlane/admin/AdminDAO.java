@@ -13,8 +13,10 @@ import com.test.plainPlane.vo.Gs;
 public interface AdminDAO {
 //show all staff list
 	public List<Gs> staffList();
-	//add staff
+	//insert staff
 	public int addStaff(Gs staff);
+	//delete staff
+	public int deleteStaff(String staff_id);
 
 	
 //show all flight list

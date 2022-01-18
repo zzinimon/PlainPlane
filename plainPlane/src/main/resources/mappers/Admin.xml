@@ -10,7 +10,11 @@
 		INSERT INTO GS(GS_ID, GS_PW, GS_AUTH,GS_AIRLINE)
 		VALUES(#{gs_id},#{gs_pw},#{gs_auth},#{gs_airline})
 	</insert>
-	
+	<!-- 	delete Gs VO -->
+	<delete id="deleteStaff">
+		DELETE FROM GS
+		WHERE GS_ID=#{gs_id}
+	</delete>
 
 
 

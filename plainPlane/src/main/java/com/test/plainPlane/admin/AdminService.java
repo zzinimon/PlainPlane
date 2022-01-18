@@ -17,10 +17,14 @@ public class AdminService {
 	public List<Gs> staffList(){
 		return adminDAO.staffList();
 	}
-	//add staff
+	//insert staff
 	public int addStaff(String[] att) {
 		Gs staff=new Gs(att[0],att[1],0,att[2]);
 		return adminDAO.addStaff(staff);
+	}
+	//delete staff
+	public int deleteStaff(String staff_id) {
+		return adminDAO.deleteStaff(staff_id);
 	}
 
 	

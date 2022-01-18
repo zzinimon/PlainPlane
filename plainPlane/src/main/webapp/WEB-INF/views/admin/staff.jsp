@@ -43,25 +43,40 @@
 	
 <!-- script zone	 -->
 <script>
-	var input=document.getElementById("cmd");
+	const input=document.getElementById("cmd");
 	
 	input.addEventListener("keyup",function(event){
 		if(event.keyCode===13){	//press Enter key
-			$.ajax({
-				type : "post",
-				url : "/admin/staff/inputCmd",
-				data : {cmd:cmd.value},
-				dataType : "text",
-				success : function(){
-					location.href="/admin/staff"
-					//input.value="";
-				},
-				error : function(){
-					alert("CHK CMD");
+			if(input.value.startsWith("/")){
+				const instr=cmd.value.substring(0,cmd.value.indexOf(" "));
+				const data=cmd.value.substring(cmd.value.indexOf(" ")+1);
+				if(instr=="/del"){
+					del(instr,data);
 				}
-			});
+				else{cmdtrigger(instr,data);}
+			}else console.log("nothing happened")
 		}
 	});
+	function del(instr,data){
+		let code=prompt("Enter Admin code to confirm");
+		if(code=="admin"){cmdtrigger(instr,data);}
+		else{alert("wrong code");}
+	}
+	function cmdtrigger(instr,data){
+		$.ajax({
+			type : "post",
+			url : "/admin/staff"+instr+"?data="+data,
+			data : {cmd:cmd.value},
+			dataType : "text",
+			success : function(){
+				console.log("success")
+				window.location.href="/admin/staff"
+			},
+			error : function(e){
+				alert("ERROR OCCURED");
+			}
+		});
+	}
 </script>
 </body>
 </html>
