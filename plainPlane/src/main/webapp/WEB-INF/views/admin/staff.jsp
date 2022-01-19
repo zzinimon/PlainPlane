@@ -10,9 +10,17 @@
 	body{
 		margin:auto;
 		text-align: center;
+		background-color: aliceblue;
+	}
+	div{
+		margin:auto;
+		background-color: white;
+		width:500px;
 	}
 	table{
 		margin:auto;
+		padding:10px;
+		padding-bottom: 30px;
 	}
 	th{
 		border:1px solid black; 
@@ -20,19 +28,19 @@
 	#cmd{
 		width: 100%;
 	}
+	p{
+		font-size:80px; 
+	}
 </style>
 </head>
 <body>
 	<div> 
-		<details>
-			<summary>auth</summary>
-			<p>OJT=0<br>GS=1<br>GC=2<br>DS=3<br>SV=4</p>
-		</details>
+		<p>PP</p>
 		<table>
-			<caption><input id="cmd" type="text" placeholder="command line"></input></caption>
+			<caption><input id="cmd" type="text" placeholder="command line" autofocus></input></caption>
 			<tr><th>Employee no</th><th>Authority</th><th>Air Line</th></tr>
 			<c:forEach var="gs" items="${gs}">
-				<tr><td>${gs.gs_id}</td><td>${gs.gs_auth}</td><td>${gs.gs_airline}</td></tr>
+				<tr><td>${gs.gs_id}</td><td class='auth'>${gs.gs_auth}</td><td>${gs.gs_airline}</td></tr>
 			</c:forEach>
 		</table>
 	</div>
@@ -44,6 +52,7 @@
 <!-- script zone	 -->
 <script>
 	const input=document.getElementById("cmd");
+	const authority=["OJT","GS","GC","DS","SUPERVISIOR","ADMIN"];
 	
 	input.addEventListener("keyup",function(event){
 		if(event.keyCode===13){	//press Enter key
@@ -54,7 +63,7 @@
 					del(instr,data);
 				}
 				else{cmdtrigger(instr,data);}
-			}else console.log("nothing happened")
+			}else {cmd.value="";console.log("nothing happened")}
 		}
 	});
 	function del(instr,data){
@@ -69,14 +78,18 @@
 			data : {cmd:cmd.value},
 			dataType : "text",
 			success : function(){
-				console.log("success")
-				window.location.href="/admin/staff"
+				console.log("success");
+				window.location.href="/admin/staff";
 			},
 			error : function(e){
-				alert("ERROR OCCURED");
+				alert("CHK CMD");
 			}
 		});
 	}
+	//present authority
+	document.getElementsByClassName("auth").innerText="test";
+	
+	
 </script>
 </body>
 </html>

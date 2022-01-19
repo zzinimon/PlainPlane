@@ -5,17 +5,40 @@
 	<select id="staffList" resultType="Gs">
 		SELECT * FROM GS
 	</select>
+	<!-- 	select by airline/auth/id -->
+<!--
+	<select id="selectByAirline" resultMap="Gs" parameterType="String">
+		SELECT * FROM GS
+		WHERE GS_AIRLINE=#{gs_airline}
+		ORDER BY GS_AUTH DESC
+	</select>
+	<select id="selectByAuth" resultMap="Gs" parameterType="String">
+		SELECT * FROM GS
+		WHERE GS_AUTH=#{gs_auth}
+		ORDER BY GS_AUTH DESC
+	</select>
+	-->
+	<select id="selectById" resultType="Gs">
+		SELECT * FROM GS
+		WHERE GS_ID=#{gs_id}
+	</select>
 	<!-- 	insert Gs VO -->
 	<insert id="addStaff" parameterType="Gs">
 		INSERT INTO GS(GS_ID, GS_PW, GS_AUTH,GS_AIRLINE)
 		VALUES(#{gs_id},#{gs_pw},#{gs_auth},#{gs_airline})
 	</insert>
 	<!-- 	delete Gs VO -->
-	<delete id="deleteStaff">
+	<delete id="deleteStaff" parameterType="String">
 		DELETE FROM GS
 		WHERE GS_ID=#{gs_id}
 	</delete>
-
+<!-- 	modify auth of Gs Vo -->
+	<update id="modifyAuth" parameterType="Gs">
+		UPDATE GS
+		SET GS_AUTH=#{gs_auth}
+		WHERE GS_ID=#{gs_id}
+	</update>
+	
 
 
 

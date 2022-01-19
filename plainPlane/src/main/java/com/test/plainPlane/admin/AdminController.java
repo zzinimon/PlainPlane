@@ -51,7 +51,7 @@ public class AdminController {
 		else{return suc;}
 	}
 	
-	//insert staff
+	//insert staff	(/add "id" "pw" "airline")
 	@PostMapping("/staff/add")
 	public ResponseEntity addStaff(@RequestParam String data) {
 		System.out.println("staff info:"+data);
@@ -64,14 +64,23 @@ public class AdminController {
 			return suc;
 		}
 	}
-	//delete staff
+	//delete staff	(/del "id")
 	@PostMapping("/staff/del")
 	public ResponseEntity deleteStaff(@RequestParam String data) {
 		if(data.equalsIgnoreCase("admin")) return fail;	//Cannot delete ADMIN
 		int rst=adminService.deleteStaff(data);	//rst=0 means couldn't find the staff
 		return (rst==1? suc: fail);
 	}
-	
+	//up o downgrade a Authority	(/auth "id" up, /auth "id" down)
+	@PostMapping("/staff/auth")
+	public ResponseEntity modifyAuth(@RequestParam String data) {
+		String[] strArr=data.split(" ");
+		if(strArr.length==2) {
+			String staff_id=strArr[0];
+			String upDown=strArr[1];
+		return (adminService.modifyAuth(staff_id,upDown)==1?suc: fail);
+		}else return fail;
+	}
 	
 	
 	
