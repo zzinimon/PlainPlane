@@ -10,7 +10,7 @@
 	body{
 		margin:auto;
 		text-align: center;
-		background-color: aliceblue;
+		background-color: #F3F8FF;
 	}
 	div{
 		margin:auto;
@@ -23,7 +23,11 @@
 		padding-bottom: 30px;
 	}
 	th{
-		border:1px solid black; 
+		//border:1px solid black; 
+		width:100px;
+	}
+	tr:nth-child(2n){
+		background-color: #C6CFFF;
 	}
 	#cmd{
 		width: 100%;
@@ -57,8 +61,9 @@
 	input.addEventListener("keyup",function(event){
 		if(event.keyCode===13){	//press Enter key
 			if(input.value.startsWith("/")){
-				const instr=cmd.value.substring(0,cmd.value.indexOf(" "));
+				const instr=cmd.value.substring(0,cmd.value.indexOf(" ")).toLowerCase();
 				const data=cmd.value.substring(cmd.value.indexOf(" ")+1);
+				console.log(data);
 				if(instr=="/del"){
 					del(instr,data);
 				}
