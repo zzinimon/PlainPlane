@@ -1,11 +1,21 @@
 /admin/staff
-*test
+*TEST
 	test command(sucess)
-*test fail
+*TEST "FAIL"
 	test command(fail)
-*add id pw airline
+*ADD "ID" "PW" "AIR LINE"
 	input 3 attributes to succeed.
 	default auth is 0(OJT)
+	{}
+*DEL "ID"
+	delete staff
+*AUTH "ID" UP
+*AUTH "ID" DOWN
+	up/downgrade staff's authority
+	{OJT, GS,GC,DS,SUPERVISOR}
+*ONLY "AUTH"
+*ONLY "AIR LINE"
+	show only selected auth/air line staffs
 
 
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ

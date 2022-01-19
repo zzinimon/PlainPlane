@@ -1,3 +1,6 @@
+<%@page import="java.util.LinkedList"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -38,17 +41,25 @@
 </style>
 </head>
 <body>
+	<% List<String> auth=new LinkedList<String>();
+		auth.add("OJT");
+		auth.add("GS");
+		auth.add("GC");
+		auth.add("DS");
+		auth.add("SUPERVISOR");
+		auth.add("ADMIN");
+		pageContext.setAttribute("auth", auth);
+	%>
 	<div> 
 		<p>PP</p>
 		<table>
 			<caption><input id="cmd" type="text" placeholder="command line" autofocus></input></caption>
 			<tr><th>Employee no</th><th>Authority</th><th>Air Line</th></tr>
 			<c:forEach var="gs" items="${gs}">
-				<tr><td>${gs.gs_id}</td><td class='auth'>${gs.gs_auth}</td><td>${gs.gs_airline}</td></tr>
+				<tr><td>${gs.gs_id}</td><td class='auth'>${auth[gs.gs_auth]}</td><td>${gs.gs_airline}</td></tr>
 			</c:forEach>
 		</table>
 	</div>
-	
 	
 	
 	
@@ -63,7 +74,6 @@
 			if(input.value.startsWith("/")){
 				const instr=cmd.value.substring(0,cmd.value.indexOf(" ")).toLowerCase();
 				const data=cmd.value.substring(cmd.value.indexOf(" ")+1);
-				console.log(data);
 				if(instr=="/del"){
 					del(instr,data);
 				}
