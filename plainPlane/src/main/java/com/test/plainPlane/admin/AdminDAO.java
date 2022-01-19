@@ -15,7 +15,7 @@ public interface AdminDAO {
 	public List<Gs> staffList();
 	//selectby
 	public List<Gs> selectByAirline(String al);
-	public List<Gs> selectByAuth(String auth);
+	public List<Gs> selectByAuth(int auth);
 	public Gs selectById(String staff_id);
 	//insert staff
 	public int addStaff(Gs staff);

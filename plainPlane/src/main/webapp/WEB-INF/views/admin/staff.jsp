@@ -19,15 +19,14 @@
 		margin:auto;
 		background-color: white;
 		width:500px;
+		padding:30px;
 	}
 	table{
 		margin:auto;
-		padding:10px;
-		padding-bottom: 30px;
 	}
 	th{
-		//border:1px solid black; 
 		width:100px;
+		padding:30px;
 	}
 	tr:nth-child(2n){
 		background-color: #C6CFFF;
@@ -46,11 +45,11 @@
 		auth.add("GS");
 		auth.add("GC");
 		auth.add("DS");
-		auth.add("SUPERVISOR");
+		auth.add("SV");
 		auth.add("ADMIN");
 		pageContext.setAttribute("auth", auth);
 	%>
-	<div> 
+	<div id="info"> 
 		<p>PP</p>
 		<table>
 			<caption><input id="cmd" type="text" placeholder="command line" autofocus></input></caption>
@@ -67,25 +66,35 @@
 <!-- script zone	 -->
 <script>
 	const input=document.getElementById("cmd");
-	const authority=["OJT","GS","GC","DS","SUPERVISIOR","ADMIN"];
 	
 	input.addEventListener("keyup",function(event){
 		if(event.keyCode===13){	//press Enter key
-			if(input.value.startsWith("/")){
-				const instr=cmd.value.substring(0,cmd.value.indexOf(" ")).toLowerCase();
-				const data=cmd.value.substring(cmd.value.indexOf(" ")+1);
-				if(instr=="/del"){
-					del(instr,data);
-				}
-				else{cmdtrigger(instr,data);}
-			}else {cmd.value="";console.log("nothing happened")}
+			const lowcmd=cmd.value.toLowerCase();
+			const instr=cmd.value.substring(0,cmd.value.indexOf(" ")).toLowerCase();
+			const data=cmd.value.substring(cmd.value.indexOf(" ")+1);
+			
+			console.log("command="+instr+",data="+data)
+			
+			//COMMAND SHOULD BE START WITH "/"
+			if(!lowcmd.startsWith("/")) {cmd.value="";console.log("nothing happened")}
+			//DELETE COMMAND
+			else if(lowcmd.startsWith("/del")) del(data);
+			//SHOW ONLY SPECIFIED STAFFS PROCESS
+			else if(lowcmd.startsWith("/only")) location.href="staff?only="+data;
+			//GO BACK TO SEE ALL OF THE STAFFS
+			else if(lowcmd=="/all") location.href="staff";
+			//ELSE COMMAND LIKE ADD, AUTH, TEST
+			else cmdtrigger(instr,data);
 		}
 	});
-	function del(instr,data){
+	
+// 	DELETE THE STAFF PROCESS
+	function del(data){
 		let code=prompt("Enter Admin code to confirm");
-		if(code=="admin"){cmdtrigger(instr,data);}
-		else{alert("wrong code");}
+		if(code=="ADMIN") cmdtrigger("/del",data);
+		else alert("wrong code");
 	}
+// ELSE COMMAND TRIGGER(ADD, AUTH, TEST)	
 	function cmdtrigger(instr,data){
 		$.ajax({
 			type : "post",
@@ -93,16 +102,15 @@
 			data : {cmd:cmd.value},
 			dataType : "text",
 			success : function(){
+				location.href="/admin/staff";
 				console.log("success");
-				window.location.href="/admin/staff";
+				//$("#info").load(" #info > *");
 			},
 			error : function(e){
 				alert("CHK CMD");
 			}
 		});
 	}
-	//present authority
-	document.getElementsByClassName("auth").innerText="test";
 	
 	
 </script>

@@ -21,7 +21,7 @@ public class AdminService {
 	public List<Gs> selectByAirline(String al) {
 		return adminDAO.selectByAirline(al);
 	}
-	public List<Gs> selectByAuth(String auth){
+	public List<Gs> selectByAuth(int auth){
 		return adminDAO.selectByAuth(auth);
 	}
 	public Gs selectById(String staff_id) {
@@ -46,9 +46,10 @@ public class AdminService {
 			//there is no lower auth than 0(OJT)
 			else if(grade.equalsIgnoreCase("down")&&origin>0) staff.setGs_auth(origin-1);
 		}
-			
 		return adminDAO.modifyAuth(staff);
 	}
+	
+	
 	
 
 	
