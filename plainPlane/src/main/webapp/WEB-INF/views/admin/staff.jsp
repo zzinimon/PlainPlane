@@ -9,34 +9,8 @@
 <meta charset="utf-8">
 <title>Admin page - GS List</title>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/../css/AdminZone.css">
 <style>
-	body{
-		margin:auto;
-		text-align: center;
-		background-color: #F3F8FF;
-	}
-	div{
-		margin:auto;
-		background-color: white;
-		width:500px;
-		padding:30px;
-	}
-	table{
-		margin:auto;
-	}
-	th{
-		width:100px;
-		padding:30px;
-	}
-	tr:nth-child(2n){
-		background-color: #C6CFFF;
-	}
-	#cmd{
-		width: 100%;
-	}
-	p{
-		font-size:80px; 
-	}
 </style>
 </head>
 <body>
@@ -51,6 +25,7 @@
 	%>
 	<div id="info"> 
 		<p>PP</p>
+		<h4>Staff List</h4>
 		<table>
 			<caption><input id="cmd" type="text" placeholder="command line" autofocus></input></caption>
 			<tr><th>Employee no</th><th>Authority</th><th>Air Line</th></tr>
@@ -81,7 +56,7 @@
 			else if(lowcmd.startsWith("/del")) del(data);
 			//SHOW ONLY SPECIFIED STAFFS PROCESS
 			else if(lowcmd.startsWith("/only")) location.href="staff?only="+data;
-			//GO BACK TO SEE ALL OF THE STAFFS
+			//GO BACK TO SEE ALL OF THE STAFF
 			else if(lowcmd=="/all") location.href="staff";
 			//ELSE COMMAND LIKE ADD, AUTH, TEST
 			else cmdtrigger(instr,data);

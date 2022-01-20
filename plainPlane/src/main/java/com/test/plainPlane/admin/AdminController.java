@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.yaml.snakeyaml.util.ArrayUtils;
 
+import com.test.plainPlane.vo.Flt;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -106,11 +108,16 @@ public class AdminController {
 	
 	
 	
-//all about FLIGHT
+//all about ADMIN FLIGHT
 	@GetMapping("/flight")
 	public String flightAll(Model model) {
 		model.addAttribute("flt",adminService.flightList());
 		return "admin/flight";
+	}
+	@GetMapping("/flight/add")
+	public String addFlight(Flt flight) {
+		return "admin/AddFlight";
+		
 	}
 	
 }

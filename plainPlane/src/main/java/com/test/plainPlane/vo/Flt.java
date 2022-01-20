@@ -14,7 +14,7 @@ public class Flt {
 	private String flt_no;
 	private Date flt_date;
 	private String craft_id;
-	private String flt_bound;
+	private Boolean flt_bound;
 	private String flt_stat;
 	private Time flt_sta;
 	private Time flt_std;

@@ -16,15 +16,33 @@
 *ONLY "AUTH"
 *ONLY "AIR LINE"
 	show only selected auth/air line staffs
-
+*ALL
+	show all of the staff
 
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 /admin/flight
+*ADD
+	add flight
+*MOD FLT
+	modify flight
+*DEL FLT
+	delete flight
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+LOGIN PROCESS
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+/common/flight
+*"AIRPORT(IATA 3LETTER)"
+	arrive at or depart from selected airport
+*ARR "AIRPORT"
+*DEP "AIRPORT"
+	arrivals and departures
 
+	
 
 
 
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+/common/chkin
 
 
 

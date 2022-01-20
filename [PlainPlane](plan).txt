@@ -1,3 +1,9 @@
+Los Colores
+#F3F8FF
+#DEECFF
+#C6CFFF
+#E8D3FF
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 (*DOM OR INT)
 *GO-SHOW
 *CHKIN(MEMO)
