@@ -21,10 +21,9 @@
 	<div>
 		<h3>TEST LIST</h3>
 		<a href="http://localhost:8080/admin/staff">[Admin zone]staff list</a><br>
-		<a href="http://localhost:8080/admin/flight">[Admin zone]flight list</a><br>
+		<a href="http://localhost:8080/flight">flight list</a><br>
 		<a href="http://localhost:8080/login">main(login)</a><br>
 		<a href="http://localhost:8080/main">common zone</a><br>
-		<a href="http://localhost:8080/flight">flight list</a><br>
 	</div>
 		<img width="700px" src="../../images/ERD.png" alt="plain plane ERD">
 		

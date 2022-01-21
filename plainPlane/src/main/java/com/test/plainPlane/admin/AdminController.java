@@ -1,13 +1,7 @@
 package com.test.plainPlane.admin;
 
 import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-
-import javax.mail.Authenticator;
-
-import org.apache.ibatis.reflection.ArrayUtil;
 
 //import javax.servlet.http.HttpServletResponse;
 
@@ -20,15 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.yaml.snakeyaml.util.ArrayUtils;
 
-import com.test.plainPlane.vo.Flt;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 	@Autowired
 	AdminService adminService;
+	
 	ResponseEntity suc=new ResponseEntity(HttpStatus.OK);
 	ResponseEntity fail=new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 	List<String> auth=Arrays.asList(new String[]{"OJT","GS","GC","DS","SV","ADMIN"});
@@ -102,24 +95,5 @@ public class AdminController {
 		return (adminService.modifyAuth(staff_id,upDown)==1?suc: fail);
 		}else return fail;
 	}
-	
-	
-	
-	
-	
-	
-//all about ADMIN FLIGHT
-	@GetMapping("/flight")
-	public String flightAll(Model model) {
-		model.addAttribute("flt",adminService.flightList());
-		return "admin/flight";
-	}
-	@PostMapping("/flight/add")
-	public String addFlight(Flt flight) {
-		System.out.println("sta="+flight.getFlt_sta()+",std="+flight.getFlt_std());
-		adminService.addFlight(flight);
-		return "redirect:/admin/flight";
-		
-	}
-	
+
 }

@@ -24,11 +24,4 @@ public interface AdminDAO {
 	//modify authority
 	public int modifyAuth(Gs staff);
 	
-	
-//show all flight list
-	public List<Flt> flightList();
-	//insert flight
-	public int addFlight(Flt flight);
-	
-	
 }

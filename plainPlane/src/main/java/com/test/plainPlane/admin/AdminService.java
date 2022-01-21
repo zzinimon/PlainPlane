@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.test.plainPlane.vo.Flt;
 import com.test.plainPlane.vo.Gs;
 
 @Service
@@ -49,19 +48,4 @@ public class AdminService {
 		return adminDAO.modifyAuth(staff);
 	}
 	
-	
-	
-
-	
-	
-	
-//show all flight list
-	public List<Flt> flightList(){
-		return adminDAO.flightList();
-	}
-	//insert flight
-	public int addFlight(Flt flight) {
-		return adminDAO.addFlight(flight);
-	}
-
 }

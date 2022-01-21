@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.plainPlane.flight.FlightDAO">
+	<select id="flightList" resultType="Flt">
+		SELECT * FROM FLT
+	</select>
+	<!-- 	select by -->
+	<select id="selectFLTByNo" resultType="Flt" parameterType="String" >
+		SELECT * FROM FLT
+		WHERE FLT_NO=#{flt_no}
+	</select>
+	<select id="selectFLTByDate" resultType="Flt" parameterType="String" >
+		SELECT * FROM FLT
+		WHERE FLT_DATE=#{flt_date}
+	</select>
+	<select id="selectFLTByCraft" resultType="Flt" parameterType="String" >
+		SELECT * FROM FLT
+		WHERE CRAFT_ID=#{craft_id}
+	</select>
+	<select id="selectFLTByBound" resultType="Flt" parameterType="Integer" >
+		SELECT * FROM FLT
+		WHERE FLT_BOUND=#{flt_bound}
+	</select>
+	<select id="selectFLTByStat" resultType="Flt" parameterType="Integer" >
+		SELECT * FROM FLT
+		WHERE FLT_STAT=#{flt_stat}
+	</select>
+	<select id="selectFLTByDpt" resultType="Flt" parameterType="String" >
+		SELECT * FROM FLT
+		WHERE FLT_DPT=#{flt_dpt}
+	</select>
+	<select id="selectFLTByArr" resultType="Flt" parameterType="String" >
+		SELECT * FROM FLT
+		WHERE FLT_ARR=#{flt_arr}
+	</select>
+	<select id="selectFLTByAirport" resultType="Flt" parameterType="String" >
+		SELECT * FROM FLT
+		WHERE FLT_DPT=#{airport}
+			OR FLT_ARR=#{airport}
+	</select>
+	<select id="selectFLTByAirline" resultType="Flt" parameterType="String" >
+		SELECT * FROM FLT
+		WHERE FLT_AIRLINE=#{flt_airline}
+	</select>
+	
+	
+	<!-- 	insert Flight Vo -->
+	<insert id="addFlight" parameterType="Flt">
+		INSERT INTO FLT(FLT_NO,FLT_DATE,CRAFT_ID,FLT_BOUND,FLT_DPT,FLT_ARR,FLT_STA,FLT_STD,FLT_AIRLINE)
+		VALUES(#{flt_no},#{flt_date},#{craft_id},#{flt_bound},#{flt_dpt},#{flt_arr},#{flt_sta},#{flt_std},#{flt_airline})
+	</insert>
+	
+	
+</mapper>
