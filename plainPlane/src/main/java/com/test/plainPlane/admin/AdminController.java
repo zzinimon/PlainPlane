@@ -114,9 +114,9 @@ public class AdminController {
 		model.addAttribute("flt",adminService.flightList());
 		return "admin/flight";
 	}
-	@GetMapping("/flight/add")
+	@PostMapping("/flight/add")
 	public String addFlight(Flt flight) {
-		return "admin/AddFlight";
+		return "redirect:/admin/flight";
 		
 	}
 	
