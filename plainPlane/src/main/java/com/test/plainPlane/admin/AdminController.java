@@ -116,6 +116,8 @@ public class AdminController {
 	}
 	@PostMapping("/flight/add")
 	public String addFlight(Flt flight) {
+		System.out.println("sta="+flight.getFlt_sta()+",std="+flight.getFlt_std());
+		adminService.addFlight(flight);
 		return "redirect:/admin/flight";
 		
 	}

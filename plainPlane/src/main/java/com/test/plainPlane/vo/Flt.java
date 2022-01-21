@@ -16,8 +16,8 @@ public class Flt {
 	private String craft_id;
 	private Boolean flt_bound;
 	private String flt_stat;
-	private Time flt_sta;
-	private Time flt_std;
+	private String flt_sta;
+	private String flt_std;
 	private String flt_dpt;
 	private String flt_arr;
 	private String flt_airline;

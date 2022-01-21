@@ -59,5 +59,9 @@ public class AdminService {
 	public List<Flt> flightList(){
 		return adminDAO.flightList();
 	}
+	//insert flight
+	public int addFlight(Flt flight) {
+		return adminDAO.addFlight(flight);
+	}
 
 }

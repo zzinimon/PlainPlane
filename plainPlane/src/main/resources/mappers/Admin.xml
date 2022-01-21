@@ -47,5 +47,11 @@
 	<select id="flightList" resultType="Flt">
 		SELECT * FROM FLT
 	</select>
+	<!-- 	insert Flight Vo -->
+	<insert id="addFlight" parameterType="Flt">
+		INSERT INTO FLT(FLT_NO,FLT_DATE,CRAFT_ID,FLT_BOUND,FLT_DPT,FLT_ARR,FLT_STA,FLT_STD,FLT_AIRLINE)
+		VALUES(#{flt_no},#{flt_date},#{craft_id},#{flt_bound},#{flt_dpt},#{flt_arr},#{flt_sta},#{flt_std},#{flt_airline})
+	</insert>
+	
 
 </mapper>

@@ -27,4 +27,8 @@ public interface AdminDAO {
 	
 //show all flight list
 	public List<Flt> flightList();
+	//insert flight
+	public int addFlight(Flt flight);
+	
+	
 }

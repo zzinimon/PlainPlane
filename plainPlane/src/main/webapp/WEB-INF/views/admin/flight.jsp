@@ -2,6 +2,7 @@
 <%@page import="java.util.LinkedList"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,6 +38,15 @@
 		cursor: pointer;
 	}
 	input[type=date],input[type=time],input[type=text]{width:150px;}
+/*	
+	#pkConst{
+		color:red;
+		animation: blink 1s step-end infinite;
+	}
+	@keyframes blink{
+		50%{opacity:0;}
+	}
+*/
 </style>
 </head>
 <body>
@@ -44,8 +54,7 @@
 	<div id="modalZone" style="z-index=0;position=fixed;">
 		<span id="closeModal">&times;</span>
 		<h1>FLT INFO</h1>
-		<form role="form" action="addFlight" method="post" id="flightForm"><table> 
-		
+		<form role="form" action="flight/add" method="post" id="flightForm"><table> 
 			<tr><td>FLT NO.</td><td><input type="text" name="flt_no" id="flt_no" required></td></tr>
 			<tr><td>DATE</td><td><input type="date" name="flt_date" required></td></tr>
 			<tr><td>CRAFT</td><td><input type="text" name="craft_id" list="crafts" required>
@@ -58,6 +67,7 @@
 					<option value="B787">
 				</datalist>
 			</td></tr>
+<!-- 			<tr><td colspan="2" id="pkConst">***FLT Already Exist***</td></tr> -->
 			<tr><td>BOUND</td><td><input type="radio" name="flt_bound" value="0" required>INT<input type="radio" name="flt_bound" value="1" required>DOM</td></tr>
 			<tr><td>DEP</td><td><input type="text" name="flt_dpt" required></td></tr>
 			<tr><td>ARR</td><td><input type="text" name="flt_arr" required></td></tr>
@@ -76,8 +86,8 @@
 					<option value="THA">
 				</datalist>
 			</td></tr>
-		</table></form>
-		<button type="submit" >CONFIRM</button>
+		</table>
+		<input type="submit" value="CONFIRM"></form>
 	</div>
 	
 	
@@ -103,7 +113,10 @@ stat.add("ARRIVED");
 		<table>
 			<tr><th>NO</th><th>DATE</th><th>CRAFT</th><th>BOUND</th><th>STATUS</th><th>DPT</th><th>ARR</th><th>STA</th><th>STD</th><th>AIR LINE</th></tr>
 			<c:forEach var="flt" items="${flt}">
-				<tr><td>${flt.flt_no}</td><td>${flt.flt_date}</td><td>${flt.craft_id}</td><td>${bound[flt.flt_bound]}</td><td>${stat[flt.flt_stat]}</td><td>${flt.flt_dpt}</td><td>${flt.flt_arr}</td><td>${flt.flt_sta}</td><td>${flt.flt_std}</td><td>${flt.flt_airline}</td></tr>
+				<tr><td>${flt.flt_no}</td><td>${flt.flt_date}</td>
+				<td>${flt.craft_id}</td><td>${bound[flt.flt_bound]}</td>
+				<td>${stat[flt.flt_stat]}</td><td>${flt.flt_dpt}</td><td>${flt.flt_arr}</td>
+				<td>${fn:substring(flt.flt_sta,0,5)}</td><td>${fn:substring(flt.flt_std,0,5)}</td><td>${flt.flt_airline}</td></tr>
 			</c:forEach>
 		</table>
 		</div>
@@ -118,6 +131,10 @@ stat.add("ARRIVED");
 <!-- SCRIPT ZONE -->
 
 <script>
+	function test(){
+		console.log(sta.value);
+	}
+
 	const input=document.getElementById("cmd");
 	const modal=document.getElementById("modalZone")
 	modal.style.display="none";
@@ -135,21 +152,39 @@ stat.add("ARRIVED");
 	
 //COMMAND LINE EVENT LISTENER
 	input.addEventListener("keyup",function (event){
-		if(event.keyCode===13&&modal.style.display=="none"){	//press Enter key
+		if(event.keyCode===13&&modal.style.display=="none"){	//press Enter key && while modal is displayed, cannot use cmdline
 			const lowcmd=input.value.toLowerCase();
 			console.log("lowercase="+lowcmd);
 			input.value="";
 			
-			//ADD FLIGHT COMMAND
-			if(lowcmd=="/add flt"){
-				modal.style.display="block";
-				flt_no.focus();
-			}else if(lowcmd=="/test"){
-				console.log("test cmd")
+			//COMMAND SHOULD BE START WITH "/"
+			if(!lowcmd.startsWith("/")){cmd.value="";console.log("nothing happened")}
+			//TEST COMMAND
+			else if(lowcmd=="/test"){console.log("test cmd")
 			//cmdtrigger(cmd,data)
 			}
+			//ADD FLIGHT COMMAND
+			else if(lowcmd=="/add flt"){modal.style.display="block";flt_no.focus();}
 		}
 	});
+	
+	
+	// COMMAND TRIGGER
+	function cmdtrigger(instr,data){
+		$.ajax({
+			type : "post",
+			url : "/admin/flight"+instr+"?data="+data,
+			data : {cmd:cmd.value},
+			dataType : "text",
+			success : function(){
+				location.href="/admin/flight";
+				console.log("success");
+			},
+			error : function(e){
+				alert("CHK CMD");
+			}
+		});
+	}
 			
 	
 </script>
