@@ -1,6 +1,5 @@
 package com.test.plainPlane.flight;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class FlightService {
 		return flightDAO.flightList();
 	}
 	//select by
-	public Flt selectFLT(String flt_no, Date flt_date) {
+	public List<Flt> selectFLT(String flt_no, String flt_date) {
 		return flightDAO.selectFLT(flt_no,flt_date);
 	}
 	public List<Flt> selectFLTByNo(String flt_no){

@@ -5,6 +5,12 @@
 		SELECT * FROM FLT
 	</select>
 	<!-- 	select by -->
+	
+	<select id="selectFLT" resultType="Flt" parameterType="String" >
+		SELECT * FROM FLT
+		WHERE FLT_NO=#{param1}
+			AND FLT_DATE=#{param2}
+	</select>
 	<select id="selectFLTByNo" resultType="Flt" parameterType="String" >
 		SELECT * FROM FLT
 		WHERE FLT_NO=#{flt_no}

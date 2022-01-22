@@ -15,6 +15,7 @@
 	}
 	#info{overflow-x: scroll;}
 	#modalZone{
+		display:none;
 		position: fixed;
 		z-index: 0;
 		margin:50px;
@@ -129,7 +130,7 @@ stat.add("ARRIVED");
 
 
 <!-- SCRIPT ZONE -->
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
 	function test(){
 		console.log(sta.value);
@@ -155,29 +156,82 @@ stat.add("ARRIVED");
 		if(event.keyCode===13&&modal.style.display=="none"){	//press Enter key && while modal is displayed, cannot use cmdline
 			const lowcmd=input.value.toLowerCase();
 			const cmd=input.value.split(' ');
-			console.log("/flight"+cmd[0]+"?data="+cmd);
-			input.value="";
 			
 			//COMMAND SHOULD BE START WITH "/"
 			if(!lowcmd.startsWith("/")){cmd.value="";console.log("nothing happened")}
 			//ADD FLIGHT COMMAND
-			else if(lowcmd=="/add flt"){modal.style.display="block";flt_no.focus();}
-			//SHOW SPECIFIED FLT
-			else if(lowcmd.startsWith("/only")) location.href="?only="+cmd[1]+"&condition="+cmd[2];
+			else if(lowcmd.startsWith("/add")) fltSelecter(cmd);
+			//SHOW ONLY SPECIFIED FLT
+			else if(lowcmd.startsWith("/only")) location.href="/flight?only="+cmd[1]+"&condition="+cmd[2];
+			else if(lowcmd.startsWith("/show")) fltSelecter(cmd);
 			//GO BACK TO SEE ALL OF THE FLT
 			else if(lowcmd=="/all") location.href="flight";
 			//TEST COMMAND
 			else{
 				console.log("your input:"+lowcmd)
 				console.log("cmd trigger is operated")
-				//cmdtrigger(cmd)
+				//cmdTrigger(cmd)
+				input.value="";
 			}
 		}
 	});
 	
+	//SELECT FLT COMMAND TRIGGER
+	function selecter(cmd,url){
+		if(cmd.length!=3) alert("CHK CMD")
+		else{
+			
+			/*
+			$.ajax({
+				type : "get",
+				url : url,
+				data : {cmd:cmd.value},
+				dataType : "text",
+				success : function(){
+					location.href=url;
+				},
+				error : function(e){
+					alert("CHK CMD");
+				}
+			});
+			
+			*/
+		}
+	}
+	
+	//ADD COMMAND TRIGGER
+	function fltSelecter(cmd){
+		console.log(cmd)
+		if(cmd.length!=3) alert("CHK CMD");
+		else if(cmd[2].length!=8) alert("DATE FORM ERROR");
+		else{
+			$.ajax({
+				type : "post",
+				url : "/flight/chkflt",
+				data : {no:cmd[1],date:cmd[2]},
+				dataType : "text",
+				success : function(data){	//TRUE=ALREADY EXIST, FALSE=SHOULD BE ADDED
+					if(data=="true") {
+						if(cmd[0].toLowerCase()=="/add") alert("ALREADY EXISTS")
+						location.href="/flight?no="+cmd[1]+"&date="+cmd[2];
+					}else if(data=="false"){//SHOULD ADD IT
+						if(cmd[0].toLowerCase()=="/show") {
+							let quest=confirm("NO SUCH FLIGHT, DO YOU WANT TO ADD IT?")
+							if(quest==false) return null;
+						}
+						modal.style.display="block";flt_no.focus();
+						
+					}
+				},
+				error : function(data){
+					alert("[ajax]error");
+				}
+			});
+		}
+	}
 	
 	// COMMAND TRIGGER
-	function cmdtrigger(cmd){
+	function cmdTrigger(cmd){
 		$.ajax({
 			type : "post",
 			url : "/flight"+cmd[0],

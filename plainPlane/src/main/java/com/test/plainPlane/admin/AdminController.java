@@ -22,8 +22,8 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 	
-	ResponseEntity suc=new ResponseEntity(HttpStatus.OK);
-	ResponseEntity fail=new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+	ResponseEntity<?> suc=new ResponseEntity(HttpStatus.OK);
+	ResponseEntity<?> fail=new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 	List<String> auth=Arrays.asList(new String[]{"OJT","GS","GC","DS","SV","ADMIN"});
 	
 //all about STAFF	
@@ -56,7 +56,7 @@ public class AdminController {
 	
 	//command line TEST		(/TEST "STR", /TEST FAIL)
 	@PostMapping("/staff/test")
-	public ResponseEntity test(@RequestParam String data) {
+	public ResponseEntity<?> test(@RequestParam String data) {
 		System.out.println("cmd:"+data);
 		if(data.equalsIgnoreCase("fail")) {
 			System.err.println("failed");
@@ -67,7 +67,7 @@ public class AdminController {
 	
 	//insert staff	(/ADD "ID" "PW" "AIRLINE")
 	@PostMapping("/staff/add")
-	public ResponseEntity addStaff(@RequestParam String data) {
+	public ResponseEntity<?> addStaff(@RequestParam String data) {
 		System.out.println("staff info:"+data);
 		String[] attributes=data.split(" ");
 		if(attributes.length!=3) {
@@ -80,14 +80,14 @@ public class AdminController {
 	}
 	//delete staff	(/DEL "ID")
 	@PostMapping("/staff/del")
-	public ResponseEntity deleteStaff(@RequestParam String data) {
+	public ResponseEntity<?> deleteStaff(@RequestParam String data) {
 		if(data.equalsIgnoreCase("admin")) return fail;	//Cannot delete ADMIN
 		int rst=adminService.deleteStaff(data);	//rst=0 means couldn't find the staff
 		return (rst==1? suc: fail);
 	}
 	//UP O DOWNGRADE A AUTHORITY	(/AUTH "ID" UP, /AUTH "ID" DOWN)
 	@PostMapping("/staff/auth")
-	public ResponseEntity modifyAuth(@RequestParam String data) {
+	public ResponseEntity<?> modifyAuth(@RequestParam String data) {
 		String[] strArr=data.split(" ");
 		if(strArr.length==2) {
 			String staff_id=strArr[0];
