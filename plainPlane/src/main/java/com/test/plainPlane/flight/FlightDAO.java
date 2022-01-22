@@ -23,7 +23,7 @@ public interface FlightDAO {
 	public List<Flt> selectFLTByDpt(String dep);
 	public List<Flt> selectFLTByArr(String arr);
 	public List<Flt> selectFLTByAirport(String airport);
-	public List<Flt> selectFLTByAirline(String Airline);
+	public List<Flt> selectFLTByAirline(String airline);
 	
 	//insert flight
 	public int addFlight(Flt flight);

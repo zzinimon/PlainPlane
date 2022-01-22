@@ -111,7 +111,7 @@ stat.add("ARRIVED");
 		<input id="cmd" type="text" placeholder="command line" autofocus></input>
 		<div id="info">
 		<table>
-			<tr><th>NO</th><th>DATE</th><th>CRAFT</th><th>BOUND</th><th>STATUS</th><th>DPT</th><th>ARR</th><th>STA</th><th>STD</th><th>AIR LINE</th></tr>
+			<tr><th>FLT</th><th>DATE</th><th>CRAFT</th><th>BOUND</th><th>STATUS</th><th>DPT</th><th>ARR</th><th>STA</th><th>STD</th><th>AIR LINE</th></tr>
 			<c:forEach var="flt" items="${flt}">
 				<tr><td>${flt.flt_no}</td><td>${flt.flt_date}</td>
 				<td>${flt.craft_id}</td><td>${bound[flt.flt_bound]}</td>
@@ -154,30 +154,37 @@ stat.add("ARRIVED");
 	input.addEventListener("keyup",function (event){
 		if(event.keyCode===13&&modal.style.display=="none"){	//press Enter key && while modal is displayed, cannot use cmdline
 			const lowcmd=input.value.toLowerCase();
-			console.log("lowercase="+lowcmd);
+			const cmd=input.value.split(' ');
+			console.log("/flight"+cmd[0]+"?data="+cmd);
 			input.value="";
 			
 			//COMMAND SHOULD BE START WITH "/"
 			if(!lowcmd.startsWith("/")){cmd.value="";console.log("nothing happened")}
-			//TEST COMMAND
-			else if(lowcmd=="/test"){console.log("test cmd")
-			//cmdtrigger(cmd,data)
-			}
 			//ADD FLIGHT COMMAND
 			else if(lowcmd=="/add flt"){modal.style.display="block";flt_no.focus();}
+			//SHOW SPECIFIED FLT
+			else if(lowcmd.startsWith("/only")) location.href="?only="+cmd[1]+"&condition="+cmd[2];
+			//GO BACK TO SEE ALL OF THE FLT
+			else if(lowcmd=="/all") location.href="flight";
+			//TEST COMMAND
+			else{
+				console.log("your input:"+lowcmd)
+				console.log("cmd trigger is operated")
+				//cmdtrigger(cmd)
+			}
 		}
 	});
 	
 	
 	// COMMAND TRIGGER
-	function cmdtrigger(instr,data){
+	function cmdtrigger(cmd){
 		$.ajax({
 			type : "post",
-			url : "/admin/flight"+instr+"?data="+data,
+			url : "/flight"+cmd[0],
 			data : {cmd:cmd.value},
 			dataType : "text",
 			success : function(){
-				location.href="/admin/flight";
+				location.href="/flight";
 				console.log("success");
 			},
 			error : function(e){

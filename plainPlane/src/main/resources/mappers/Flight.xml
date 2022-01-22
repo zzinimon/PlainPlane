@@ -17,7 +17,7 @@
 		SELECT * FROM FLT
 		WHERE CRAFT_ID=#{craft_id}
 	</select>
-	<select id="selectFLTByBound" resultType="Flt" parameterType="Integer" >
+	<select id="selectFLTByBound" resultType="Flt">
 		SELECT * FROM FLT
 		WHERE FLT_BOUND=#{flt_bound}
 	</select>

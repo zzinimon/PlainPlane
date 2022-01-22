@@ -54,7 +54,7 @@ public class AdminController {
 	}
 	*/
 	
-	//command line TEST
+	//command line TEST		(/TEST "STR", /TEST FAIL)
 	@PostMapping("/staff/test")
 	public ResponseEntity test(@RequestParam String data) {
 		System.out.println("cmd:"+data);
