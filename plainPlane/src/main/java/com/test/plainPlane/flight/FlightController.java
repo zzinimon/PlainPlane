@@ -63,8 +63,8 @@ public class FlightController {
 					break;
 				case "dpt":model.addAttribute("flt",flightService.selectFLTByDpt(condition));break;
 				case "arr":model.addAttribute("flt",flightService.selectFLTByArr(condition));break;
-				case "airport":model.addAttribute("flt",flightService.selectFLTByAirport(condition));break;
-				case "airline":model.addAttribute("flt",flightService.selectFLTByAirline(condition));break;
+				case "ap":model.addAttribute("flt",flightService.selectFLTByAirport(condition));break;
+				case "al":model.addAttribute("flt",flightService.selectFLTByAirline(condition));break;
 				default:
 					break;
 			}

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Admin page - FLT List</title>
+<title>Flight List</title>
 <link rel="stylesheet" type="text/css" href="/../css/AdminZone.css">
 <style>
 	body{
@@ -56,9 +56,9 @@
 		<span id="closeModal">&times;</span>
 		<h1>FLT INFO</h1>
 		<form role="form" action="flight/add" method="post" id="flightForm"><table> 
-			<tr><td>FLT NO.</td><td><input type="text" name="flt_no" id="flt_no" required></td></tr>
-			<tr><td>DATE</td><td><input type="date" name="flt_date" required></td></tr>
-			<tr><td>CRAFT</td><td><input type="text" name="craft_id" list="crafts" required>
+			<tr><td>FLT NO.</td><td><input id="addFltNo" type="text" name="flt_no" readonly></td></tr>
+			<tr><td>DATE</td><td><input id="addFltDate" type="date" name="flt_date" readonly></td></tr>
+			<tr><td>CRAFT</td><td><input id="addCraft" type="text" name="craft_id" list="crafts" required>
 				<datalist id="crafts">
 					<option value="TEST">
 					<option value="A320">
@@ -68,7 +68,6 @@
 					<option value="B787">
 				</datalist>
 			</td></tr>
-<!-- 			<tr><td colspan="2" id="pkConst">***FLT Already Exist***</td></tr> -->
 			<tr><td>BOUND</td><td><input type="radio" name="flt_bound" value="0" required>INT<input type="radio" name="flt_bound" value="1" required>DOM</td></tr>
 			<tr><td>DEP</td><td><input type="text" name="flt_dpt" required></td></tr>
 			<tr><td>ARR</td><td><input type="text" name="flt_arr" required></td></tr>
@@ -93,6 +92,7 @@
 	
 	
 	
+	
 <!-- 	MAIN ZONE	 -->
 <%	List<String> stat=new LinkedList<String>();
 		stat.add("SCHEDULED");
@@ -112,9 +112,10 @@ stat.add("ARRIVED");
 		<input id="cmd" type="text" placeholder="command line" autofocus></input>
 		<div id="info">
 		<table>
-			<tr><th>FLT</th><th>DATE</th><th>CRAFT</th><th>BOUND</th><th>STATUS</th><th>DPT</th><th>ARR</th><th>STA</th><th>STD</th><th>AIR LINE</th></tr>
-			<c:forEach var="flt" items="${flt}">
-				<tr><td>${flt.flt_no}</td><td>${flt.flt_date}</td>
+			<tr><th>IDX</th><th>FLT</th><th>DATE</th><th>CRAFT</th><th>BOUND</th><th>STATUS</th><th>DPT</th><th>ARR</th><th>STA</th><th>STD</th><th>AIR LINE</th></tr>
+			<c:forEach var="flt" items="${flt}" varStatus="status">
+			
+				<tr><td>${status.count}</td><td id="${status.count}no" >${flt.flt_no}</td><td id='${status.count}date'>${flt.flt_date}</td>
 				<td>${flt.craft_id}</td><td>${bound[flt.flt_bound]}</td>
 				<td>${stat[flt.flt_stat]}</td><td>${flt.flt_dpt}</td><td>${flt.flt_arr}</td>
 				<td>${fn:substring(flt.flt_sta,0,5)}</td><td>${fn:substring(flt.flt_std,0,5)}</td><td>${flt.flt_airline}</td></tr>
@@ -160,13 +161,19 @@ stat.add("ARRIVED");
 			//COMMAND SHOULD BE START WITH "/"
 			if(!lowcmd.startsWith("/")){cmd.value="";console.log("nothing happened")}
 			//ADD FLIGHT COMMAND
-			else if(lowcmd.startsWith("/add")) fltSelecter(cmd);
+			else if(lowcmd.startsWith("/add")) fltChecker(cmd);
+			
 			//SHOW ONLY SPECIFIED FLT
+			else if(lowcmd.startsWith("/show")) fltChecker(cmd);
 			else if(lowcmd.startsWith("/only")) location.href="/flight?only="+cmd[1]+"&condition="+cmd[2];
-			else if(lowcmd.startsWith("/show")) fltSelecter(cmd);
 			//GO BACK TO SEE ALL OF THE FLT
 			else if(lowcmd=="/all") location.href="flight";
-			//TEST COMMAND
+			
+			//SELECT(GO TO PSGR PAGE) FLT
+			else if(lowcmd.startsWith("/sel")) fltSelecter(cmd);
+			
+			
+			//ELSE COMMAND
 			else{
 				console.log("your input:"+lowcmd)
 				console.log("cmd trigger is operated")
@@ -176,31 +183,9 @@ stat.add("ARRIVED");
 		}
 	});
 	
-	//SELECT FLT COMMAND TRIGGER
-	function selecter(cmd,url){
-		if(cmd.length!=3) alert("CHK CMD")
-		else{
-			
-			/*
-			$.ajax({
-				type : "get",
-				url : url,
-				data : {cmd:cmd.value},
-				dataType : "text",
-				success : function(){
-					location.href=url;
-				},
-				error : function(e){
-					alert("CHK CMD");
-				}
-			});
-			
-			*/
-		}
-	}
 	
-	//ADD COMMAND TRIGGER
-	function fltSelecter(cmd){
+	//SELECT,ADD COMMAND TRIGGER
+	function fltChecker(cmd){
 		console.log(cmd)
 		if(cmd.length!=3) alert("CHK CMD");
 		else if(cmd[2].length!=8) alert("DATE FORM ERROR");
@@ -219,7 +204,10 @@ stat.add("ARRIVED");
 							let quest=confirm("NO SUCH FLIGHT, DO YOU WANT TO ADD IT?")
 							if(quest==false) return null;
 						}
-						modal.style.display="block";flt_no.focus();
+						addFltNo.value=cmd[1];
+						addFltDate.value=cmd[2].substring(0,4)+"-"+cmd[2].substring(4,6)+"-"+cmd[2].substring(6,8);
+						modal.style.display="block";
+						addCraft.focus();
 						
 					}
 				},
@@ -228,6 +216,21 @@ stat.add("ARRIVED");
 				}
 			});
 		}
+	}
+	
+	
+	function fltSelecter(cmd){
+		console.log(cmd[1])
+		console.log(parseInt(cmd[1])<parseInt(1))
+		console.log(parseInt(cmd[1])>${fn:length(flt)})
+		if(cmd[1]>"${fn:length(flt)}"===true || parseInt(cmd[1])<parseInt(1)===true) alert("ERROR : OUT OF RANGE");
+		else if(cmd.length!=2) alert("CMD CHK");
+		else{
+			console.log("no="+document.getElementById(cmd[1]+"no").innerText)
+			console.log("date="+document.getElementById(cmd[1]+"date").innerText)
+			input.value=""
+		}
+		//location.href="/chkin"
 	}
 	
 	// COMMAND TRIGGER

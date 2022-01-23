@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.plainPlane.chkin.ChkinDAO">
+<!-- 	GET PSGR LIST -->
+	<select id="psgrList" resultType="Psgr">
+		SELECT C.CHKIN_ID, C.CHKIN_SEAT, C.CHKIN_STAT,C.CHKIN_SSR,P.*
+		FROM CHKIN AS C
+		LEFT JOIN PAX AS P
+		ON C.PAX_UID=P.PAX_UID
+		WHERE FLT_NO=#{param1} AND FLT_DATE=#{param2}
+	</select>
+
+</mapper>
