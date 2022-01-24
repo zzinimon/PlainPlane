@@ -13,11 +13,11 @@ public class FlightService {
 	FlightDAO flightDAO;
 	
 	
-	//show all flight list
+	//SHOW ALL FLIGHT LIST
 	public List<Flt> flightList(){
 		return flightDAO.flightList();
 	}
-	//select by
+	//SELECT BY
 	public List<Flt> selectFLT(String flt_no, String flt_date) {
 		return flightDAO.selectFLT(flt_no,flt_date);
 	}
@@ -48,9 +48,15 @@ public class FlightService {
 	public List<Flt> selectFLTByAirline(String Airline){
 		return flightDAO.selectFLTByAirline(Airline);
 	}
-	//insert flight
+	
+	//INSERT FLIGHT
 	public int addFlight(Flt flight) {
 		return flightDAO.addFlight(flight);
 	}
 	
+	//MODIFY FLIGHT
+	public int modifyFlight(Flt flight) {
+		flightDAO.modifyFlight(flight);
+		return 0;
+	}
 }

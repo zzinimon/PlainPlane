@@ -75,7 +75,14 @@ public class FlightController {
 	@PostMapping("/add")
 	public String addFlight(Flt flight) {
 		flightService.addFlight(flight);
-		return "redirect:/admin/flight";
+		return "redirect:/flight";
+	}
+	// MODIFY FLIGHT	(/MOD "IDX")
+	@PostMapping("/modify")
+	public String modifyFlight(Flt flight) {
+		System.out.println("flight modifyied!!");
+		flightService.modifyFlight(flight);
+		return "redirect:/flight";
 	}
 	@PostMapping("/chkflt")
 	@ResponseBody

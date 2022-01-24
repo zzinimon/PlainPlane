@@ -10,9 +10,9 @@ import com.test.plainPlane.vo.Flt;
 @Repository
 @Mapper
 public interface FlightDAO {
-	//show all flight list
+	//SHOW ALL FLIGHT LIST
 	public List<Flt> flightList();
-	//select by
+	//SELECT BY
 	public List<Flt> selectFLT(String flt_no, String flt_date);
 	public List<Flt> selectFLTByNo(String flt_no);
 	public List<Flt> selectFLTByDate(String date);
@@ -24,7 +24,9 @@ public interface FlightDAO {
 	public List<Flt> selectFLTByAirport(String airport);
 	public List<Flt> selectFLTByAirline(String airline);
 	
-	//insert flight
+	//INSERT FLIGHT
 	public int addFlight(Flt flight);
+	//MODIFY FLIGHT
+	public int modifyFlight(Flt flight);
 	
 }

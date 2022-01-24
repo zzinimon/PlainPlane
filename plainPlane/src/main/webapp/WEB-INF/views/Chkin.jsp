@@ -19,10 +19,9 @@
 
 <div>
 		<p>PP</p> 
-		<h4>Passenger List</h4>
+		<h4>Passenger on ${param.flt_no}/${param.flt_date}</h4>
 		<input id="cmd" type="text" placeholder="command line" autofocus></input>
 		<div id="info">
-		<h1>FLIGHT:${param.flt_no} DATE:${param.flt_date}</h1>
 		
 <!-- 		<table> 
 			<tr><th>IDX</th><th>FLT</th><th>DATE</th><th>CRAFT</th><th>BOUND</th><th>STATUS</th><th>DPT</th><th>ARR</th><th>STA</th><th>STD</th><th>AIR LINE</th></tr>
@@ -56,7 +55,10 @@
 			
 			//COMMAND SHOULD BE START WITH "/"
 			if(!lowcmd.startsWith("/")) {cmd.value="";console.log("nothing happened")}
-			//DELETE COMMAND
+			//BACK TO FLIGHT LIST
+			else if(lowcmd=="/flist"){location.href="/flight"}
+			
+			//ELSE COMMAND
 			else {
 				cmdtrigger(instr,data);
 				

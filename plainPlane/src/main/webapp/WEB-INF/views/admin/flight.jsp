@@ -13,8 +13,8 @@
 	body{
 		position:fixed;
 	}
-	#info{overflow-x: scroll;}
-	#modalZone{
+	#info{overflow: scroll;}
+	.modal{
 		display:none;
 		position: fixed;
 		z-index: 0;
@@ -28,12 +28,12 @@
 	form{
 		padding:30px;
 	}
-	#closeModal{
+	.closeModal{
 		float:right;
 		font-size:30px;
 		font-weight: bold;
 	}
-	#closeModal:hover,#closeModal:focus{
+	.closeModal:hover,#closeModal:focus{
 		color:#E8D3FF;
 		text-decoration:none;
 		cursor: pointer;
@@ -52,9 +52,10 @@
 </head>
 <body>
 <!-- 	MODAL ZONE -->
-	<div id="modalZone" style="z-index=0;position=fixed;">
-		<span id="closeModal">&times;</span>
-		<h1>FLT INFO</h1>
+	<!-- 	ADD FLT MODAL -->
+	<div class="modal" id="addModal" style="z-index=0;position=fixed;">
+		<span class="closeModal" id="closeAdd" >&times;</span>
+		<h1>NEW FLT INFO</h1>
 		<form role="form" action="flight/add" method="post" id="flightForm"><table> 
 			<tr><td>FLT NO.</td><td><input id="addFltNo" type="text" name="flt_no" readonly></td></tr>
 			<tr><td>DATE</td><td><input id="addFltDate" type="date" name="flt_date" readonly></td></tr>
@@ -68,11 +69,11 @@
 					<option value="B787">
 				</datalist>
 			</td></tr>
-			<tr><td>BOUND</td><td><input type="radio" name="flt_bound" value="0" required>INT<input type="radio" name="flt_bound" value="1" required>DOM</td></tr>
+			<tr><td>BOUND</td><td><input type="radio" name="flt_bound" value="1" required>INT<input type="radio" name="flt_bound" value="0" required>DOM</td></tr>
 			<tr><td>DEP</td><td><input type="text" name="flt_dpt" required></td></tr>
 			<tr><td>ARR</td><td><input type="text" name="flt_arr" required></td></tr>
-			<tr><td>STA</td><td><input type="time" name="flt_sta"></td></tr>
-			<tr><td>STD</td><td><input type="time" name="flt_std"></td></tr>
+			<tr><td>STA</td><td><input type="time" name="flt_sta" required></td></tr>
+			<tr><td>STD</td><td><input type="time" name="flt_std" required></td></tr>
 			<tr><td>AIRLINE</td><td><input type="text" name="flt_airline" list="airlines" required>
 				<datalist id="airlines">
 					<option value="TEST">
@@ -88,6 +89,46 @@
 			</td></tr>
 		</table>
 		<input type="submit" value="CONFIRM"></form>
+	</div>
+	
+	<!-- 	MODIFY FLT MODAL -->
+	<div class="modal" id="modModal" style="z-index=0;position=fixed;">
+		<span class="closeModal" id="closeMod">&times;</span>
+		<h1>MODIFY FLT</h1>
+		<form role="form" action="flight/modify" method="post" id="flightForm"><table> 
+			<tr><td>FLT NO.</td><td><input id="modFltNo" type="text" name="flt_no" readonly></td></tr>
+			<tr><td>DATE</td><td><input id="modFltDate" type="date" name="flt_date" readonly></td></tr>
+			<tr><td>CRAFT</td><td><input id="modCraft" type="text" name="craft_id" list="crafts" required>
+				<datalist id="crafts">
+					<option value="TEST">
+					<option value="A320">
+					<option value="B737">
+					<option value="B738">
+					<option value="B747">
+					<option value="B787">
+				</datalist>
+			</td></tr>
+			<tr><td>BOUND</td><td><input id="modBoundINT" type="radio" name="flt_bound" value="1" required>INT<input id="modBoundDOM" type="radio" name="flt_bound" value="0" required>DOM</td></tr>
+			<tr><td>STATUS</td><td id="modStat"></td></tr>
+			<tr><td>DEP</td><td><input id="modDep" type="text" name="flt_dpt" required></td></tr>
+			<tr><td>ARR</td><td><input id="modArr" type="text" name="flt_arr" required></td></tr>
+			<tr><td>STA</td><td><input id="modSta" type="time" name="flt_sta" required></td></tr>
+			<tr><td>STD</td><td><input id="modStd" type="time" name="flt_std" required></td></tr>
+			<tr><td>AIRLINE</td><td><input id="modAl" type="text" name="flt_airline" list="airlines" required>
+				<datalist id="airlines">
+					<option value="TEST">
+					<option value="AAR">
+					<option value="VNL">
+					<option value="KAL">
+					<option value="JAL">
+					<option value="ANA">
+					<option value="CHH">
+					<option value="UAL">
+					<option value="THA">
+				</datalist>
+			</td></tr>
+		</table>
+		<input type="submit" value="MODIFY"></form>
 	</div>
 	
 	
@@ -116,9 +157,9 @@ stat.add("ARRIVED");
 			<c:forEach var="flt" items="${flt}" varStatus="status">
 			
 				<tr><td>${status.count}</td><td id="${status.count}no" >${flt.flt_no}</td><td id='${status.count}date'>${flt.flt_date}</td>
-				<td>${flt.craft_id}</td><td>${bound[flt.flt_bound]}</td>
-				<td>${stat[flt.flt_stat]}</td><td>${flt.flt_dpt}</td><td>${flt.flt_arr}</td>
-				<td>${fn:substring(flt.flt_sta,0,5)}</td><td>${fn:substring(flt.flt_std,0,5)}</td><td>${flt.flt_airline}</td></tr>
+				<td id="${status.count}craft">${flt.craft_id}</td><td id="${status.count}bound">${bound[flt.flt_bound]}</td>
+				<td id="${status.count}stat">${stat[flt.flt_stat]}</td><td id="${status.count}dep">${flt.flt_dpt}</td><td id="${status.count}arr">${flt.flt_arr}</td>
+				<td id="${status.count}sta">${fn:substring(flt.flt_sta,0,5)}</td><td id="${status.count}std">${fn:substring(flt.flt_std,0,5)}</td><td id="${status.count}al">${flt.flt_airline}</td></tr>
 			</c:forEach>
 		</table>
 		</div>
@@ -133,28 +174,31 @@ stat.add("ARRIVED");
 <!-- SCRIPT ZONE -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
-	function test(){
-		console.log(sta.value);
-	}
-
+// DEFAULT SETTING
 	const input=document.getElementById("cmd");
-	const modal=document.getElementById("modalZone")
-	modal.style.display="none";
+	const addModal=document.getElementById("addModal")
+	const modModal=document.getElementById("modModal")
+	addModal.style.display="none"
+	modModal.style.display="none"
 	
-	document.getElementById("closeModal").onclick=function(){
-		modal.style.display="none";
+	document.getElementById("closeAdd").onclick=function(){
+		addModal.style.display="none";
 	}
+	document.getElementById("closeMod").onclick=function(){
+		modModal.style.display="none";
+	}
+/*	
 	//When the user clicks anywhere outside of the modal, close it
 	window.onclick=function(event){
 		if(event.target==modal){
 			modal.style.display="none;"
 		}
 	}
-	
+*/	
 	
 //COMMAND LINE EVENT LISTENER
 	input.addEventListener("keyup",function (event){
-		if(event.keyCode===13&&modal.style.display=="none"){	//press Enter key && while modal is displayed, cannot use cmdline
+		if(event.keyCode===13&&addModal.style.display=="none"&&modModal.style.display=="none"){	//press Enter key && while modal is displayed, cannot use cmdline
 			const lowcmd=input.value.toLowerCase();
 			const cmd=input.value.split(' ');
 			
@@ -171,6 +215,8 @@ stat.add("ARRIVED");
 			
 			//SELECT(GO TO PSGR PAGE) FLT
 			else if(lowcmd.startsWith("/sel")) fltSelecter(cmd);
+			//MODIFY FLT
+			else if(lowcmd.startsWith("/mod")) fltMod(cmd);
 			
 			
 			//ELSE COMMAND
@@ -183,10 +229,34 @@ stat.add("ARRIVED");
 		}
 	});
 	
+	//MODIFY COMMAND TRIGGER
+	function fltMod(cmd){
+		if(cmd.length!=2) alert("CHK CMD");	//ONLY ONE PARAMETER REQUIRED
+		else if(isNaN(cmd[1])) alert("INPUT IDX NO")	//PARAMETER SHOULD BE A NUMBER
+		else if(cmd[1]>${fn:length(flt)} || cmd[1]<1) alert("OUT OF RANGE")	//THE NUMBER SHOULD BE IN THE LIST
+		else {
+			console.log("VALID COMMAND");
+			modModal.style.display="block";
+			
+			modFltNo.value=document.getElementById(cmd[1]+"no").innerText;
+			modFltDate.value=document.getElementById(cmd[1]+"date").innerText;
+			modCraft.value=document.getElementById(cmd[1]+"craft").innerText;
+			document.getElementById("modBound"+document.getElementById(cmd[1]+"bound").innerText).checked=true;
+			modStat.innerText=document.getElementById(cmd[1]+"stat").innerText;
+			modDep.value=document.getElementById(cmd[1]+"dep").innerText;
+			modArr.value=document.getElementById(cmd[1]+"arr").innerText;
+			modSta.value=document.getElementById(cmd[1]+"sta").innerText;
+			modStd.value=document.getElementById(cmd[1]+"std").innerText;
+			modAl.value=document.getElementById(cmd[1]+"al").innerText;
+			
+			modCraft.focus();
+		}
+		
+	}
+	
 	
 	//SELECT,ADD COMMAND TRIGGER
 	function fltChecker(cmd){
-		console.log(cmd)
 		if(cmd.length!=3) alert("CHK CMD");
 		else if(cmd[2].length!=8) alert("DATE FORM ERROR");
 		else{
@@ -204,11 +274,10 @@ stat.add("ARRIVED");
 							let quest=confirm("NO SUCH FLIGHT, DO YOU WANT TO ADD IT?")
 							if(quest==false) return null;
 						}
-						addFltNo.value=cmd[1];
+						addFltNo.value=cmd[1].toUpperCase();
 						addFltDate.value=cmd[2].substring(0,4)+"-"+cmd[2].substring(4,6)+"-"+cmd[2].substring(6,8);
-						modal.style.display="block";
+						addModal.style.display="block";
 						addCraft.focus();
-						
 					}
 				},
 				error : function(data){
@@ -220,17 +289,13 @@ stat.add("ARRIVED");
 	
 	
 	function fltSelecter(cmd){
-		console.log(cmd[1])
-		console.log(parseInt(cmd[1])<parseInt(1))
-		console.log(parseInt(cmd[1])>${fn:length(flt)})
-		if(cmd[1]>"${fn:length(flt)}"===true || parseInt(cmd[1])<parseInt(1)===true) alert("ERROR : OUT OF RANGE");
+		if(parseInt(cmd[1])<parseInt(1) || parseInt(cmd[1])>${fn:length(flt)})	alert("ERROR : OUT OF RANGE");
 		else if(cmd.length!=2) alert("CMD CHK");
 		else{
-			console.log("no="+document.getElementById(cmd[1]+"no").innerText)
-			console.log("date="+document.getElementById(cmd[1]+"date").innerText)
-			input.value=""
+			var selNo=document.getElementById(cmd[1]+"no").innerText;
+			var selDate=document.getElementById(cmd[1]+"date").innerText;
+			location.href="/chkin?flt_no="+selNo+"&flt_date="+selDate;
 		}
-		//location.href="/chkin"
 	}
 	
 	// COMMAND TRIGGER

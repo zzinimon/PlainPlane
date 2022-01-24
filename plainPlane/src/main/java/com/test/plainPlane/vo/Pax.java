@@ -16,4 +16,5 @@ public class Pax {
 	private String pax_name;
 	private Date pax_birth;
 	private String pax_age;
+	private String pax_nationality;
 }

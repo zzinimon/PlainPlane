@@ -50,11 +50,21 @@
 	</select>
 	
 	
-	<!-- 	insert Flight Vo -->
+	<!-- 	insert Flight -->
 	<insert id="addFlight" parameterType="Flt">
 		INSERT INTO FLT(FLT_NO,FLT_DATE,CRAFT_ID,FLT_BOUND,FLT_DPT,FLT_ARR,FLT_STA,FLT_STD,FLT_AIRLINE)
 		VALUES(#{flt_no},#{flt_date},#{craft_id},#{flt_bound},#{flt_dpt},#{flt_arr},#{flt_sta},#{flt_std},#{flt_airline})
 	</insert>
 	
+	
+	<!-- 	modify Flight -->
+	<update id="modifyFlight" parameterType="Flt">
+		UPDATE FLT
+		SET CRAFT_ID=#{craft_id},FLT_BOUND=#{flt_bound},
+			FLT_DPT=#{flt_dpt},FLT_ARR=#{flt_arr},
+			FLT_STA=#{flt_sta},FLT_STD=#{flt_std},
+			FLT_AIRLINE=#{flt_airline}
+		WHERE FLT_NO=#{flt_no} AND FLT_DATE=#{flt_date}
+	</update>
 	
 </mapper>

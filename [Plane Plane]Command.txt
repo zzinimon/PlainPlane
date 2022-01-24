@@ -20,29 +20,33 @@
 	show all of the staff
 
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-/admin/flight
-*ADD
-	add flight
-*MOD FLT
-	modify flight
-*DEL FLT
-	delete flight
+/flight
+*ADD "FLT_NO" "FLT_DATE"
+	add flight(no,date)
+	alredy exist->alert, show the flight
+*ONLY "ATTRIBUTE" "VALUE"
+	show specified flight
+*SHOW "FLT_NO" "FLT_DATE"
+	select only one flight
+*ALL
+	show all of the flights
+*SEL "IDX"
+	show passenger list on the flight
+*MOD "IDX"
+	modify the flight
+*DEL "IDX"
+	delete the flight
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+/chkin
+*FLIST
+	back to the flight list
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 LOGIN PROCESS
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-/common/flight
-*"AIRPORT(IATA 3LETTER)"
-	arrive at or depart from selected airport
-*ARR "AIRPORT"
-*DEP "AIRPORT"
-	arrivals and departures
-
-	
-
 
 
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-/common/chkin
+/pax
 
 
 
