@@ -84,6 +84,12 @@ public class FlightController {
 		flightService.modifyFlight(flight);
 		return "redirect:/flight";
 	}
+	// DELETE FLIGHT	(/DEL "IDX")
+	@PostMapping("/del")
+	public ResponseEntity<?> deleteFlight(String targetNo, String targetDate) {
+		int rst=flightService.deleteFlight(targetNo, targetDate.replace("-", ""));
+		return rst==1? suc: fail;
+	}
 	@PostMapping("/chkflt")
 	@ResponseBody
 	public boolean FlightIsExist(String no, String date){

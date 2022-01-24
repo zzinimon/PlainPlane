@@ -56,7 +56,11 @@ public class FlightService {
 	
 	//MODIFY FLIGHT
 	public int modifyFlight(Flt flight) {
-		flightDAO.modifyFlight(flight);
-		return 0;
+		return flightDAO.modifyFlight(flight);
+	}
+	
+	//DELETE FLIGHT
+	public int deleteFlight(String flt_no, String flt_date) {
+		return flightDAO.deleteFlight(flt_no,flt_date);
 	}
 }

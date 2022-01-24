@@ -28,5 +28,7 @@ public interface FlightDAO {
 	public int addFlight(Flt flight);
 	//MODIFY FLIGHT
 	public int modifyFlight(Flt flight);
+	//DELETE FLIGHT
+	public int deleteFlight(String flt_no, String flt_date);
 	
 }

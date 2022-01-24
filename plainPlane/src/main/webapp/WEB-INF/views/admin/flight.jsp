@@ -217,17 +217,30 @@ stat.add("ARRIVED");
 			else if(lowcmd.startsWith("/sel")) fltSelecter(cmd);
 			//MODIFY FLT
 			else if(lowcmd.startsWith("/mod")) fltMod(cmd);
-			
-			
+			//DELETE FLT
+			else if(lowcmd.startsWith("/del")) fltDel(cmd);
 			//ELSE COMMAND
 			else{
 				console.log("your input:"+lowcmd)
-				console.log("cmd trigger is operated")
+				console.log("INVALID COMMAND")
 				//cmdTrigger(cmd)
 				input.value="";
 			}
 		}
 	});
+	
+	//DELETE COMMAND TRIGGERE
+	function fltDel(cmd){
+		if(cmd.length!=2) alert("CHK CMD");	//ONLY ONE PARAMETER REQUIRED
+		else if(isNaN(cmd[1])) alert("INPUT IDX NO")	//PARAMETER SHOULD BE A NUMBER
+		else if(cmd[1]>${fn:length(flt)} || cmd[1]<1) alert("OUT OF RANGE")	//THE NUMBER SHOULD BE IN THE LIST
+		else{
+			let code=prompt("***DELETE WARNING*** \n"+document.getElementById(cmd[1]+"no").innerText+"/"+document.getElementById(cmd[1]+"date").innerText+"\nEnter Admin code to confirm");
+			if(code=="ADMIN") cmdTrigger(cmd)
+			else alert("wrong code");
+		}
+		
+	}
 	
 	//MODIFY COMMAND TRIGGER
 	function fltMod(cmd){
@@ -235,7 +248,6 @@ stat.add("ARRIVED");
 		else if(isNaN(cmd[1])) alert("INPUT IDX NO")	//PARAMETER SHOULD BE A NUMBER
 		else if(cmd[1]>${fn:length(flt)} || cmd[1]<1) alert("OUT OF RANGE")	//THE NUMBER SHOULD BE IN THE LIST
 		else {
-			console.log("VALID COMMAND");
 			modModal.style.display="block";
 			
 			modFltNo.value=document.getElementById(cmd[1]+"no").innerText;
@@ -302,15 +314,16 @@ stat.add("ARRIVED");
 	function cmdTrigger(cmd){
 		$.ajax({
 			type : "post",
-			url : "/flight"+cmd[0],
-			data : {cmd:cmd.value},
+			url : "/flight"+cmd[0].toLowerCase(),
+			data : {"targetNo":document.getElementById(cmd[1]+"no").innerText,
+					"targetDate":document.getElementById(cmd[1]+"date").innerText},
 			dataType : "text",
 			success : function(){
 				location.href="/flight";
 				console.log("success");
 			},
 			error : function(e){
-				alert("CHK CMD");
+				alert("ERROR OCCURED");
 			}
 		});
 	}

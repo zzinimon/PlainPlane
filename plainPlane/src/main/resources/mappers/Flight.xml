@@ -49,13 +49,11 @@
 		WHERE FLT_AIRLINE=#{flt_airline}
 	</select>
 	
-	
 	<!-- 	insert Flight -->
 	<insert id="addFlight" parameterType="Flt">
 		INSERT INTO FLT(FLT_NO,FLT_DATE,CRAFT_ID,FLT_BOUND,FLT_DPT,FLT_ARR,FLT_STA,FLT_STD,FLT_AIRLINE)
 		VALUES(#{flt_no},#{flt_date},#{craft_id},#{flt_bound},#{flt_dpt},#{flt_arr},#{flt_sta},#{flt_std},#{flt_airline})
 	</insert>
-	
 	
 	<!-- 	modify Flight -->
 	<update id="modifyFlight" parameterType="Flt">
@@ -67,4 +65,9 @@
 		WHERE FLT_NO=#{flt_no} AND FLT_DATE=#{flt_date}
 	</update>
 	
+	<!-- 	delete flight -->
+	<delete id="deleteFlight" parameterType="String">
+		DELETE FROM FLT
+		WHERE FLT_NO="${param1}" AND FLT_DATE=${param2}
+	</delete>
 </mapper>
