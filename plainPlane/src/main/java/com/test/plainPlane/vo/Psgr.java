@@ -14,6 +14,8 @@ public class Psgr {
 	private String chkin_seat;
 	private String chkin_stat;
 	private String chkin_ssr;
+	private String flt_no;
+	private String flt_date;
 
 	private Long pax_uid;
 	

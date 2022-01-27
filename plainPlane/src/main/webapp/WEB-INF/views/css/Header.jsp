@@ -26,9 +26,18 @@
 	<c:choose>
 		<c:when test="${empty sessionScope.staff}" >
 			<button onclick="location.href='/login'" >LOGIN</button>
+			
+			
+			<input id="cmd" type="text" placeholder="command line" autofocus></input>
+			
+			
+			
 		</c:when>
 		<c:otherwise>
 			LOGIN:${sessionScope.staff.gs_id}(${sessionScope.staff.gs_airline}/${auth[sessionScope.staff.gs_auth]})
+			<c:if test="${sessionScope.staff.gs_auth eq 5}">
+				<a href="http://localhost:8080/admin/staff">Staff List</a>
+			</c:if>
 			<button id="logoutbtn">LOGOUT</button>
 			<p>PP</p> 
 			<input id="cmd" type="text" placeholder="command line" autofocus></input>

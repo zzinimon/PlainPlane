@@ -45,6 +45,8 @@
 			else if(lowcmd.startsWith("/only")) location.href="staff?only="+data;
 			//GO BACK TO SEE ALL OF THE STAFF
 			else if(lowcmd=="/all") location.href="staff";
+			//GO TO FLIGHT LIST
+			else if(lowcmd=="/flist"){location.href="/flight"}
 			//ELSE COMMAND LIKE ADD, AUTH, TEST
 			else cmdtrigger(instr,data);
 		}

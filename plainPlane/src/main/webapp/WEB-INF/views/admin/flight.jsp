@@ -306,9 +306,11 @@
 		if(parseInt(cmd[1])<parseInt(1) || parseInt(cmd[1])>${fn:length(flt)})	alert("ERROR : OUT OF RANGE");
 		else if(cmd.length!=2) alert("CMD CHK");
 		else{
-			var selNo=document.getElementById(cmd[1]+"no").innerText;
-			var selDate=document.getElementById(cmd[1]+"date").innerText;
-			location.href="/chkin?flt_no="+selNo+"&flt_date="+selDate;
+				var selNo=document.getElementById(cmd[1]+"no").innerText;
+				var selDate=document.getElementById(cmd[1]+"date").innerText;
+				var selal=document.getElementById(cmd[1]+"al").innerText;
+			if("${sessionScope.staff.gs_airline}"==selal || ${sessionScope.staff.gs_auth}==5) location.href="/chkin?flt_no="+selNo+"&flt_date="+selDate;
+			else alert("AIRLINE MATCH ERROR!");
 		}
 	}
 	
