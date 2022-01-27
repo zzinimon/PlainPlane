@@ -51,6 +51,8 @@
 </style>
 </head>
 <body>
+<!-- header -->
+<%@ include file="../css/Header.jsp" %>
 <!-- 	MODAL ZONE -->
 	<!-- 	ADD FLT MODAL -->
 	<div class="modal" id="addModal" style="z-index=0;position=fixed;">

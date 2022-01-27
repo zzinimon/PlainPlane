@@ -7,16 +7,39 @@
 <title>Welcome to Plain Plane Main page</title>
 <style>
 	body{
-		background-image: url("http://moa.gov.gh/the-coat-of-arms-of-ghana-2/");
+		background-image: url("img/sky.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
 	}
+	div{
+		position:absolute;
+		top:50%;
+		left:50%;
+		transform:translate(-50%,-50%);
+		background-color: #F3F8FF;
+		width:300px;
+		height:150px;
+		
+	}
+	table{
+		position:absolute;
+		top:50%;
+		left:50%;
+		transform:translate(-50%,-50%);
+		text-align: center;
+	}
+	td{height: 30px;}
 </style>
 </head>
 <body>
 <div id="login">
-	<form method="get"><table>
-	<tr><td>ID</td><td><input type="text" name="gs_id"></td></tr>
-	<tr><td>PW</td><td><input type="password" name="gs_pw"></td></tr>
-	</table></form>
+	<form method="post" action="login">
+		<table>
+		<tr><td>ID</td><td><input autofocus type="text" name="gs_id"></td></tr>
+		<tr><td>PW</td><td><input type="password" name="gs_pw"></td></tr>
+		<tr><td colspan="2"><input type="submit" value="login"></td></tr>
+		</table>
+	</form>
 </div>
 </body>
 </html>

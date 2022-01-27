@@ -69,7 +69,7 @@ public class AdminController {
 	@PostMapping("/staff/add")
 	public ResponseEntity<?> addStaff(@RequestParam String data) {
 		System.out.println("staff info:"+data);
-		String[] attributes=data.split(" ");
+		String[] attributes=data.toUpperCase().split(" ");
 		if(attributes.length!=3) {
 			return fail;
 		}

@@ -24,7 +24,7 @@
 	<!-- 	insert Gs VO -->
 	<insert id="addStaff" parameterType="Gs">
 		INSERT INTO GS(GS_ID, GS_PW, GS_AUTH,GS_AIRLINE)
-		VALUES(#{gs_id},SHA1(#{gs_id}#{gs_pw}),#{gs_auth},#{gs_airline})
+		VALUES(#{gs_id},SHA1(#{gs_pw}),#{gs_auth},#{gs_airline})
 	</insert>
 	
 	<!-- 	delete Gs VO -->

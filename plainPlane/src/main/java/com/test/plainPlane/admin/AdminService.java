@@ -28,7 +28,7 @@ public class AdminService {
 	}
 	//insert staff
 	public int addStaff(String[] att) {
-		Gs staff=new Gs(att[0],att[1],0,att[2]);
+		Gs staff=new Gs(att[0],att[0]+att[1],0,att[2]);
 		return adminDAO.addStaff(staff);
 	}
 	//delete staff

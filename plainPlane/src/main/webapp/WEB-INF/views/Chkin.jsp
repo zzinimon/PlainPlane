@@ -23,17 +23,17 @@
 		<input id="cmd" type="text" placeholder="command line" autofocus></input>
 		<div id="info">
 		
-<!-- 		<table> 
-			<tr><th>IDX</th><th>FLT</th><th>DATE</th><th>CRAFT</th><th>BOUND</th><th>STATUS</th><th>DPT</th><th>ARR</th><th>STA</th><th>STD</th><th>AIR LINE</th></tr>
-			<c:forEach var="flt" items="${flt}" varStatus="status">
+ 		<table> 
+			<tr><th>IDX</th><th>NAME</th><th>PSPT</th><th>BIRTH</th><th>NATIONALITY</th><th>AGE</th><th>RSV NO</th><th>SEAT</th><th>STATUS</th><th>SSR</th></tr>
+			<c:forEach var="psgr" items="${psgr}" varStatus="status">
 			
-				<tr><td>${status.index+1}</td><td>${flt.flt_no}</td><td>${flt.flt_date}</td>
-				<td>${flt.craft_id}</td><td>${bound[flt.flt_bound]}</td>
-				<td>${stat[flt.flt_stat]}</td><td>${flt.flt_dpt}</td><td>${flt.flt_arr}</td>
-				<td>${fn:substring(flt.flt_sta,0,5)}</td><td>${fn:substring(flt.flt_std,0,5)}</td><td>${flt.flt_airline}</td></tr>
+				<tr><td>${status.count}</td><td>${psgr.pax_name}</td><td>${psgr.pax_pspt}</td>
+				<td>${psgr.pax_birth}</td><td>${psgr.pax_nationality}</td>
+				<td>${psgr.pax_age}</td><td>${psgr.rsv_no}</td><td>${psgr.chkin_seat}</td>
+				<td>${psgr.chkin_stat}</td><td>${psgr.chkin_ssr}</td></tr>
 			</c:forEach>
 		</table>
--->
+
 
 		</div>
 	</div>
@@ -60,8 +60,8 @@
 			
 			//ELSE COMMAND
 			else {
-				cmdtrigger(instr,data);
-				
+				console.log("cmd trigger operated")
+				//cmdtrigger(instr,data);
 			}
 		}
 	});
