@@ -140,7 +140,9 @@
 		stat.add("CHKIN");
 		stat.add("BOARDING");
 		stat.add("LANDED");
-stat.add("ARRIVED");
+		stat.add("ARRIVED");
+		stat.add("DELAY");
+		stat.add("<em>CANCELED</em>");
 	pageContext.setAttribute("stat", stat);
 	List<String> bound=new LinkedList<String>();
 	bound.add("DOM");

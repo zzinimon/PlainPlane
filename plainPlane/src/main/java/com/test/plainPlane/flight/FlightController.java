@@ -29,7 +29,7 @@ public class FlightController {
 	@GetMapping("")
 	public String flightList(Model model, @RequestParam(required = false) String only,@RequestParam(required = false) String condition,
 		@RequestParam(required = false) String no,@RequestParam(required = false) String date) {
-		String[] liStat= {"scheduled","chkin","boarding","landed","arrived"};
+		String[] liStat= {"scheduled","chkin","boarding","landed","arrived","delay","canceled"};
 		
 		//No parameter : get whole list, parameter : get the specified list
 		if(only==null&&date==null)model.addAttribute("flt",flightService.flightList());
