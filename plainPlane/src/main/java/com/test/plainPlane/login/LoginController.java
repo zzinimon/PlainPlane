@@ -25,5 +25,10 @@ public class LoginController {
 		session.setAttribute("staff", staff);
 		return "redirect:/flight";
 	}
+	@PostMapping("/logout")
+	public String logout(HttpSession session) {
+		session.setAttribute("staff", null);
+		return "redirect:/login";
+	}
 
 }

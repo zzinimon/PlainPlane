@@ -19,7 +19,6 @@
 		background-color: #F3F8FF;
 		width:300px;
 		height:150px;
-		
 	}
 	table{
 		position:absolute;

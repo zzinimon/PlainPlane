@@ -152,9 +152,7 @@
 	pageContext.setAttribute("bound", bound);
 %>
 	<div>
-		<p>PP</p> 
 		<h4>Flight List</h4>
-		<input id="cmd" type="text" placeholder="command line" autofocus></input>
 		<div id="info">
 		<table>
 			<tr><th>IDX</th><th>FLT</th><th>DATE</th><th>CRAFT</th><th>BOUND</th><th>STATUS</th><th>DPT</th><th>ARR</th><th>STA</th><th>STD</th><th>AIR LINE</th></tr>

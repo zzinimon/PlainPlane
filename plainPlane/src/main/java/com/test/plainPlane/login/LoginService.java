@@ -11,7 +11,6 @@ public class LoginService {
 	LoginDAO loginDAO;
 	
 	public Gs selectStaff(String id, String pw) {
-		System.out.println("SERVICE:"+id+pw);
 		return loginDAO.selectStaff(id, pw);
 	}
 	

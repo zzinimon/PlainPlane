@@ -3,6 +3,8 @@ package com.test.plainPlane.admin;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 //import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.test.plainPlane.vo.Gs;
+
 
 
 @Controller
@@ -28,7 +33,9 @@ public class AdminController {
 	
 //all about STAFF	
 	@GetMapping("/staff")
-	public String staffAll(Model model, @RequestParam(required = false) String only) {
+	public String staffAll(HttpSession session, Model model, @RequestParam(required = false) String only) {
+		Object staff=session.getAttribute("staff");
+		if(staff==null||((Gs)staff).getGs_auth()!=5)return "css/401page";
 		//No parameter : get whole list, parameter : get the specified list
 		if(only==null||only.equalsIgnoreCase("all")) model.addAttribute("gs", adminService.staffList());
 		//SHOW ONLY SELECTED AUTH/AIR LINE	(/ONLY "AUTH", /ONLY "AIRLINE")
