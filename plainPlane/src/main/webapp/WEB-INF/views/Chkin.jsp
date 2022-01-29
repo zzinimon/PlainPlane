@@ -10,7 +10,9 @@
 <title>CHKIN</title>
 <link rel="stylesheet" type="text/css" href="/../css/AdminZone.css">
 <style>
-
+	.uidInfo{
+		display: none;
+	}
 
 </style>
 </head>
@@ -29,6 +31,7 @@
 			<td>${psgr.pax_birth}</td><td>${psgr.pax_nationality}</td>
 			<td>${psgr.pax_age}</td><td>${psgr.rsv_no}</td><td>${psgr.chkin_seat}</td>
 			<td>${psgr.chkin_ssr}</td></tr>
+			<p class="uidInfo" id="${status.count}thPax">${psgr.pax_uid}</p>
 		</c:forEach>
 	</table>
 
@@ -47,6 +50,7 @@
 			const lowcmd=cmd.value.toLowerCase();
 			const instr=cmd.value.substring(0,cmd.value.indexOf(" ")).toLowerCase();
 			const data=cmd.value.substring(cmd.value.indexOf(" ")+1);
+			const cmdArr=cmd.value.split(' ');
 			console.log("command="+instr+",data="+data)
 			
 			//COMMAND SHOULD BE START WITH "/"
@@ -55,13 +59,17 @@
 			else if(lowcmd=="/flist"){location.href="/flight"}
 			
 			//SEARCH PSGR
-			else if(lowcmd.startsWith("/find")){
-				console.log("go to href")
-				location.href="/chkin?flt_no="+"${param.flt_no}"+"&flt_date="+"${param.flt_date}"+"&search="+data;
-				console.log("come back")
-			}
-			else if(lowcmd=="/all"){
-				location.href="/chkin?flt_no="+"${param.flt_no}"+"&flt_date="+"${param.flt_date}";
+			else if(lowcmd.startsWith("/find")){location.href="/chkin?flt_no="+"${param.flt_no}"+"&flt_date="+"${param.flt_date}"+"&search="+data;}
+			else if(lowcmd=="/all"){location.href="/chkin?flt_no="+"${param.flt_no}"+"&flt_date="+"${param.flt_date}";}
+			
+			//TO PSGR DETAIL PAGE
+			else if(lowcmd.startsWith("/sel")){
+				if(parseInt(cmdArr[1])<parseInt(1) || parseInt(cmdArr[1])>${fn:length(psgr)})	alert("ERROR : OUT OF RANGE");
+				else if(cmdArr.length!=2) alert("CMD CHK");
+				else{
+					var uid=document.getElementById(cmd[1]+"thPax")
+					location.href="/pax?uid="+uid;
+				}
 			}
 			//ELSE COMMAND
 			else {

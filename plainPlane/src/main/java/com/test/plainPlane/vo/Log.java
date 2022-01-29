@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Log {
-	private int log_id;
 	private String gs_id;
 	private Long ckin_id;
 	private String log_history;
